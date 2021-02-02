@@ -2,26 +2,41 @@
 
 <html>
   <head>
-    <title>Color Game</title>
+    <title>Colour Game</title>
     <link rel="stylesheet" href="./index.css" />
   </head>
-  <body onload="newGame()">
+  <body onload="newLevel()">
     <div id="header">
-      <h2>The Great</h2>
-      <h1 id="header-clue">rgb(xxx,xxx,xxx)</h1>
-      <h2>Guessing Game</h2>
+      <h1>Colour Guessing Game</h1>
+      <br>
+      <button class="btn" id="newgame">New Game</button>
+      </br>
+      <div class = row>
+        <h2 id="rounddiv"></h2>
+        <h2 id="countdiv"></h2>
+        <h2 id="scorediv"></h2>
+      </div>
+      <br>
+      <h2 id="rgb"></h2>
+      </br>
     </div>
     <div id="container">
-      <div class="tile" id="1"></div>
-      <div class="tile" id="2"></div>
+      <div class="row">
+        <button class="tile" id=0></button>
+        <button class="tile" id=1></button>
+        <button class="tile" id=2></button>
+      </div>
+      <br>
+      <div class="row">
+        <button class="tile" id=3></button>
+        <button class="tile" id=4></button>
+        <button class="tile" id=5></button>
+      </div>
+    </br>
     </div>
 
     <script>
-      var t1 = document.getElementById("1");
-      var t2 = document.getElementById("2");
-      var x;
-      var correctColor;
-
+      var N=6,score=0,count=0,round=0,correct,correctColor;
       function getRandomColor() {
         var letters = "0123456789ABCDEF";
         var color = "#";
@@ -31,36 +46,44 @@
         return color;
       }
 
-      function newGame() {
-        t1.style.background = getRandomColor();
-        t2.style.background = getRandomColor();
-
-        x = Math.floor(Math.random() * 2 + 1);
-
-        if (x == 1) correctColor = t1.style.background;
-        else correctColor = t2.style.background;
-        /* console.log(x);
-        console.log(correctColor); */
-
-        document.getElementById("header-clue").innerHTML = correctColor;
+      function update() {
+        document.getElementById("rounddiv").innerHTML="Level: "+round;
+        document.getElementById("scorediv").innerHTML="Score: "+score;
+        document.getElementById("countdiv").innerHTML="Attempts: "+count;
       }
 
-      t1.addEventListener("click", function () {
-        if (t1.style.background == correctColor) {
-          t2.style.background = correctColor;
-          document.getElementById("header").style.background = correctColor;
-        } else {
-          t1.style.background = "black";
+      function newLevel() {
+        count=0;
+        round++;
+        update();
+        for (let i=0; i<N; i++) {
+          document.getElementById(i).style.background= getRandomColor();
         }
-      });
+        correct=Math.floor(Math.random()*6);
+        correctColor = document.getElementById(correct).style.background ;
+        document.getElementById("rgb").innerHTML= "RGB" + String(correctColor).substr(3);
+      }
 
-      t2.addEventListener("click", function () {
-        if (t2.style.background == correctColor) {
-          t1.style.background = correctColor;
-          document.getElementById("header").style.background = correctColor;
-        } else {
-          t2.style.background = "black";
+      function check() {
+        count++;
+        if (this.style.background==correctColor) {
+          score += 5
+          update();
+          newLevel();
         }
+        else {
+          score--; 
+          update();
+        }
+      }
+
+      for (let i=0; i<N; i++) {
+        document.getElementById(i).addEventListener("click",check);
+      }
+
+      document.getElementById("newgame").addEventListener("click",function(){
+        score=0,count=0,round=0;
+        newLevel();
       });
     </script>
   </body>

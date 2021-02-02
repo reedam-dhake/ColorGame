@@ -1,10 +1,22 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: "Lucida Console", "Courier New", monospace;
+  color: black;
+}
+
+h1 {
+  text-decoration: underline;
+}
+
+body {
+  background:
+      linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%) fixed,
+      linear-gradient(127deg, rgba(255, 255, 0, 0.8), rgba(0,255,0,0) 70.71%) fixed,
+      linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%) fixed;
 }
 
 #header {
-  background-color: lightpink;
   height: 30vh;
   display: flex;
   flex-direction: column;
@@ -13,9 +25,9 @@
 }
 
 #container {
-  background-color: black;
-  height: 70vh;
+  width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
 }
@@ -23,5 +35,41 @@
 .tile {
   height: 200px;
   width: 200px;
-  background-color: aliceblue;
+  border: none;
+  border-radius: 25px;
+  box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24); 
+  cursor: pointer; 
+  outline: none; 
+  transition: 0.2s all; 
+}
+
+.tile:active { 
+  transform: scale(0.98); 
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24); 
+}
+
+.row {
+  display: flex; 
+  flex-direction: row;
+  width: 100vh;
+  justify-content: space-evenly;
+}
+
+.btn { 
+  text-decoration: none; 
+  border: none; 
+  padding: 12px 40px; 
+  font-size: 20px; 
+  background-color: green; 
+  color: #fff; 
+  border-radius: 5px; 
+  box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24); 
+  cursor: pointer; 
+  outline: none; 
+  transition: 0.2s all; 
+}
+
+.btn:active { 
+  transform: scale(0.98); 
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24); 
 }
